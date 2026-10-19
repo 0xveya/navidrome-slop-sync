@@ -1,0 +1,13 @@
+:root { color-scheme: dark; }
+body { max-width: 42rem; margin: 1rem auto; padding: 0 .75rem; font-family: sans-serif; }
+input, button { font: inherit; }
+button { min-height: 2.75rem; }
+input { max-width: 100%; box-sizing: border-box; }
+input[type=range] { width: 100%; }
+.song { display: flex; align-items: center; gap: .5rem; margin: .5rem 0; }
+.song-pick { display: flex; align-items: center; gap: .5rem; flex: 1; min-width: 0; text-align: left; }
+.song img { width: 40px; height: 40px; object-fit: cover; }
+.song-info { min-width: 0; }
+.song strong, .song small { display: block; overflow-wrap: anywhere; }
+.song-add { min-width: 2.75rem; }
+[hidden] { display: none !important; }

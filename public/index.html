@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>navidrome-slop-sync</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/client.js"></script>
+</head>
+<body>
+  <main>
+    <h1>navidrome-slop-sync</h1>
+    <p id="message" role="status" aria-live="polite"></p>
+    <section id="login-view">
+      <p>Sign into the same Navidrome account on both devices to listen together.</p>
+      <form id="login">
+        <p><label>Username <input name="username" autocomplete="username" required maxlength="100"></label></p>
+        <p><label>Password <input name="password" type="password" autocomplete="current-password" required></label></p>
+        <button type="submit">Sign in</button>
+      </form>
+    </section>
+    <section id="room-view" hidden>
+      <p><span id="presence"></span> <button id="invite">Copy invite</button> <button id="logout">Sign out</button></p>
+      <section aria-label="Shared player">
+        <img id="cover" alt="" width="96" height="96" hidden><span id="empty-art" hidden></span>
+        <h2 id="title">No song selected</h2>
+        <p id="artist">Search for a song below.</p>
+        <p><button id="enable" hidden>Enable audio on this device</button></p>
+        <p><button id="play" aria-label="Play" disabled>Play</button> <button id="next" aria-label="Next track" disabled>Next</button> <span id="playback-status">Paused</span></p>
+        <label for="seek">Position</label>
+        <input id="seek" type="range" min="0" max="1" step="0.1" value="0" disabled>
+        <span id="elapsed">0:00</span> / <span id="duration">0:00</span>
+        <details id="queue-details"><summary>Up next (<span id="queue-count">0</span>)</summary><ol id="queue"></ol></details>
+      </section>
+      <section aria-label="Music library">
+        <h2>Music</h2>
+        <form id="search"><label for="query">Search</label> <input id="query" type="search" placeholder="Song, album or artist"> <button type="submit">Search</button> <button id="shuffle" type="button">Random picks</button></form>
+        <p id="results-label"></p>
+        <h3>Albums</h3>
+        <div id="albums"></div>
+        <h3>Songs</h3>
+        <div id="songs"></div>
+      </section>
+      <p>Keep this tab open while listening.</p>
+    </section>
+  </main>
+  <audio id="audio" preload="auto"></audio>
+</body>
+</html>
