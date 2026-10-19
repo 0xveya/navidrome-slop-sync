@@ -1,0 +1,28 @@
+services:
+  navidrome-slop-sync:
+    build: .
+    image: navidrome-slop-sync:local
+    container_name: navidrome-slop-sync
+    restart: unless-stopped
+    environment:
+      NAVIDROME_URL: ${NAVIDROME_URL:-http://host.docker.internal:4533}
+      PORT: "3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "${PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD", "bun", "-e", "fetch('http://localhost:3000').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    profiles: [tunnel]
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      navidrome-slop-sync:
+        condition: service_healthy

@@ -1,0 +1,12 @@
+[tasks.dev]
+run = "bun run dev"
+[tasks.check]
+run = "bun run check"
+[tasks.build]
+run = "bun run build"
+[tasks.start]
+run = "bun run start"
+[tasks.deploy]
+run = "docker compose up -d --build --wait"
+[tasks.tunnel]
+run = "docker compose --profile tunnel up -d --build --wait"
